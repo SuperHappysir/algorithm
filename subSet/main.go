@@ -2,11 +2,10 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 )
 
 func main() {
-	slic := []interface{}{1, 2, 3}
+	slic := []interface{}{1, 2, 3, 4, 5}
 	fmt.Print(subSet(slic))
 }
 
@@ -27,19 +26,6 @@ func subSet(arr []interface{}) [][]interface{} {
 	for i := 1; i < maxCount; i++ {
 		var tArr = nullArr
 		for j := 0; j <= num; j++ {
-			fmt.Println("")
-			fmt.Println("源数据")
-			fmt.Print(i, j)
-			fmt.Println("")
-			fmt.Println("二进制数据")
-			fmt.Printf("%0"+strconv.Itoa(int(num))+"b", i)
-			fmt.Println("")
-			fmt.Printf("%0"+strconv.Itoa(int(num))+"b", j)
-			fmt.Println("")
-			fmt.Println("结果")
-			fmt.Printf("%0"+strconv.Itoa(int(num))+"b", i & j)
-			fmt.Println("")
-			fmt.Println("")
 			if (i & (1 << uint(j))) != 0 {
 				tArr = append(tArr, arr[j])
 			}
