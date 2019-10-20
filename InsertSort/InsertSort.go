@@ -27,8 +27,10 @@ func InsertSort(array sort.IntSlice) sort.IntSlice {
 		// 两两做对比，然后依次交换位置，直到插入到了应该插入的位置
 		for subIndex := index - 1; subIndex >= 0; subIndex-- {
 			if array[subIndex+1] < array[subIndex] {
+				// 发现插入的元素相对更小，交换位置，原来位置上的对象向后顺移。
 				array.Swap(subIndex+1, subIndex)
 			} else {
+				// 如果碰到不需要移动的元素，由于是已经排序好是数组，则前面的就不需要再次比较了。
 				break
 			}
 		}
