@@ -1,5 +1,7 @@
 package Max2
 
+// 时间复杂度
+//  	T(n) = 2 * T(n/2) + 2 = 5n/3 - 2
 func max2(slc []int, low, high int, max1, ma2 *int) {
 	if low+1 == high {
 		*max1 = low
