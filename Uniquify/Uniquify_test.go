@@ -1,4 +1,4 @@
-package uniquify
+package Uniquify
 
 import (
 	"reflect"
