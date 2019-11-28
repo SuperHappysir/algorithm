@@ -3,6 +3,8 @@ package MergeSort
 import "sort"
 
 // 合并2个有序数组
+// 时间复杂度O(len(arr1)+len(arr2)) -> O(n)
+// 空间复杂度O(len(arr1)+len(arr2)) -> O(n)
 func mergeOrderedArrays(arr1, arr2 sort.IntSlice) sort.IntSlice {
 	var (
 		idx1, idx2 int
