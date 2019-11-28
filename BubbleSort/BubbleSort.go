@@ -47,10 +47,15 @@ func BubbleSort(array sort.IntSlice) sort.IntSlice {
 	return array
 }
 
+// 1. 特别的写法
+// 2. 优化冒泡排序
+// 		冒泡排序会分为前段未排序的序列和后段已排序的序列
+// 		如果 【前段未排序的序列】 本身就有序（通过整趟扫描未交换任何元素可以得出），则
+// 		不用再进行扫描交换操作，整个序列已经全部有序
 func BubbleSort2(array sort.IntSlice) sort.IntSlice {
 
 	hi := len(array)
-	// while(!bubble(array, 9, hi--))
+	// while(!bubble(array, 0, hi--))
 	for !bubble(array, 0, hi) { // 逐趟做扫描交换，直至全序
 		hi--
 	}
@@ -69,4 +74,32 @@ func bubble(array sort.IntSlice, lo, hi int) bool {
 	}
 
 	return sorted
+}
+
+// 1. 更进一步优化冒泡排序
+// 		冒泡排序会分为前段未排序的序列和后段已排序的序列
+// 		如果序列中的其中一部分是有序的，为了不做无用扫描
+//		我们可以使用一个变量 (lastReverseOrderIndex) 来记录序列最后发生交换的位置
+// 		下次扫描的区间可以直接减少为[lo, lastReverseOrderIndex],可以进一步的优化效率
+func BubbleSort3(array sort.IntSlice) sort.IntSlice {
+
+	hi := len(array)
+	// while(lo < (hi = bubble2(array, 0, hi))
+	for 0 < hi { // 逐趟做扫描交换，直至全序
+		hi = bubble2(array, 0, hi)
+	}
+	return array
+}
+
+func bubble2(array sort.IntSlice, lo, hi int) int {
+	lastReverseOrderIndex := lo // 最右侧的逆序对初始化为[lo -1, lo]
+	// 同其他语言: while (++lo < hi) {}
+	for lo++; lo < hi; lo++ { // 自左向右， 逐一检查各队相邻元素
+		if array[lo-1] > array[lo] { // 若为逆序，则
+			lastReverseOrderIndex = lo                      // 更新最右侧的逆序对位置记录， 并
+			array[lo-1], array[lo] = array[lo], array[lo-1] //  swap
+		}
+	}
+
+	return lastReverseOrderIndex
 }
